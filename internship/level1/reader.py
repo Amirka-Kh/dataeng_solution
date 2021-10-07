@@ -5,6 +5,7 @@ import psycopg2.extras
 import requests
 import numpy
 from psycopg2.extensions import register_adapter, AsIs
+import pathlib
 
 
 def adapt_numpy_float64(numpy_float64):
@@ -25,19 +26,19 @@ conn = None  # to connect database
 
 # I keep dictionaries to check if data record has change
 try:
-    temp = pd.read_csv('hash_id.csv')
+    temp = pd.read_csv('./csv_files/hash_id.csv')
     hash_id = temp.to_dict()
-    os.path.remove('./hash_id.csv')
-    temp = pd.read_csv('img_paths.csv')
+    os.path.remove('./csv_files/hash_id.csv')
+    temp = pd.read_csv('./csv_files/img_paths.csv')
     img_urls = temp.to_dict()
-    os.path.remove('./img_paths.csv')
+    os.path.remove('./csv_files/img_paths.csv')
 except Exception as e:
     hash_id = {}
     img_urls = {}
 
 try:
-    output_file = pd.read_csv('output.csv')
-    os.path.remove('./output.csv')
+    output_file = pd.read_csv('./csv_files/output.csv')
+    os.path.remove('./csv_files/output.csv')
 except Exception as e:
     output_file = pd.DataFrame()
 
@@ -73,13 +74,14 @@ while True:
         output_file = output_file.append(file, True)
     index += 1
 
-output_file.to_csv('output.csv')
+path = pathlib.Path().resolve() / 'csv_files'
+output_file.to_csv(os.path.join(path, r'output.csv'))
 
 table_id = pd.DataFrame.from_dict(hash_id)
-table_id.to_csv('hash_id.csv')
+table_id.to_csv(os.path.join(path, r'hash_id.csv'))
 
 img_paths = pd.DataFrame.from_dict(img_urls)
-img_paths.to_csv('img_paths.csv')
+img_paths.to_csv(os.path.join(path, r'img_paths.csv'))
 
 try:
     with psycopg2.connect(dbname='p-data',
