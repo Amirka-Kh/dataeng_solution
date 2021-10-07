@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<form method="post" action="/search4">
+  <table>
+    <p>We provide to next endpoints: GET, POST. GET brings all records from DB
+        in JSON format. You can provide filters to get interested results.
+        For that you should specify: image existing by True or False, user min_age
+        and max_age in years. POST will manually run data processing in src_data</p>
+    <tr>
+      <td>is_image_exists</td>
+      <td><input name="image_exists" type="text" width='60' value="True"></td>
+    </tr>
+    <tr>
+      <td>min_age</td>
+      <td><input name="min_age" type="number" width='60' value="0"></td>
+    </tr>
+    <tr>
+      <td>max_age</td>
+      <td><input name="max_age" type="number" width='60' value="90"></td>
+    </tr>
+  </table>
+    <p>When you're ready, select an endpoint:</p>
+    <p><input type="submit" value="GET"></p>
+    <p><input type="submit" value="POST"></p>
+</form>
+
+{% endblock %}
