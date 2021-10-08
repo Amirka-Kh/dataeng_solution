@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<form method="get | post" action="/output">
+  <table>
+    <p>Use this from to filter data</p>
+    <tr>
+      <td>is_image_exists</td>
+      <td><input name="image_exists" type="text" width='60' value="True"></td>
+    </tr>
+    <tr>
+      <td>min_age</td>
+      <td><input name="min_age" type="number" width='60' value="0"></td>
+    </tr>
+    <tr>
+      <td>max_age</td>
+      <td><input name="max_age" type="number" width='60' value="90"></td>
+    </tr>
+  </table>
+  <p>When you're ready, click this button:</p>
+  <p><button>GET</button></p>
+</form>
+<form method="post" action="/status">
+  <div>
+    <button>POST</button>
+  </div>
+</form>
+
+{% endblock %}

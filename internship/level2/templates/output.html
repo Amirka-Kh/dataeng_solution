@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<p>Below you can see the result</p>
+<table>
+    {% for row in the_results %}
+		<tr>
+			{% for item in row %}
+				<td>{{ item }}</td>
+			{% endfor %}
+		</tr>
+	{% endfor  %}
+</table>
+
+
+{% endblock body %}
