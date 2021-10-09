@@ -68,6 +68,29 @@ HAVING COUNT(lastname) > 1
 | 4  | Sean       |
 +---------+-------+
 ```
+My solution:
+```sql
+select * from salary
+group by salary
+order by salary desc limit 1,1;
+
+select id, MAX(salary) as salary
+from salary
+where salary in 
+(select salary from salary MINUS select MAX(salary)
+ from salary);
+ 
+ select id, max(salary)as salary
+ from salary
+ where salary <> (select max(salary)
+ from salary);
+ 
+SELECT id, salary
+FROM salary A
+WHERE 2 = (SELECT count(n-2) 
+             FROM salary B 
+             WHERE B.salary>A.salary)
+```
 
 ## Algorithms and Data Structures
 1. Optimise execution time of this Python code snippet:
