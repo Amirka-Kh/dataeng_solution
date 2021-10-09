@@ -34,7 +34,7 @@ INNER JOIN id AND user_id
 ```sql
 +----+-----------+----------+
 | id | firstname | lastname |
-+----+-----------+-----------
++----+-----------+----------+
 | 1  | Ivan      | Sidorov  |
 | 2  | Alexandr  | Ivanov   |
 | 3  | Petr      | Petrov   |
