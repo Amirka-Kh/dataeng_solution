@@ -1,7 +1,7 @@
 # Level 1
 ## Content
-1.[Task description](#task-description)
-2.[Solution](#solution)
+1. [Task description](#task-description)
+2. [Solution](#solution)
 
 ## Task description
 ### Data processing description
