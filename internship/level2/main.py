@@ -12,8 +12,8 @@ import pathlib
 
 '''--------query select function--------'''
 def query_select(img_status, min_age, max_age):
-    min_age *= 365 * 24 * 3600
-    max_age += 365 * 24 * 3600
+    min_age *= 365 * 24 * 3600 * 1000
+    max_age += 365 * 24 * 3600 * 1000
     conn = None
     data = None
 
@@ -24,11 +24,13 @@ def query_select(img_status, min_age, max_age):
                               host='localhost',
                               port=5432) as conn:
             with conn.cursor() as cur:
-                if img_status == 'True':
+                if img_status:
                     cur.execute(
-                        'SELECT * FROM users WHERE birth > min_age AND birth < max_age AND image_path is not null')
+                        # 'SELECT * FROM users WHERE birth > {} AND birth < {} AND img_path is not null'.format(min_age,max_age))
+                        'SELECT * FROM users')
                 else:
-                    cur.execute('SELECT * FROM users WHERE birth > min_age AND birth < max_age AND image_path is null')
+                    cur.execute('SELECT * FROM users WHERE birth > {} AND birth < {} AND img_path is null'.format(min_age,max_age))
+                print(data)
                 data = cur.fetchall()
                 for record in data:
                     print(record)
