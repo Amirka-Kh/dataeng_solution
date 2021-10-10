@@ -109,38 +109,8 @@ My solution:
 ```
 import datetime, time
 
-def count_connections2(list1, list2) -> int:
-    count, start, finish = 0, 0, 0
-
-    start = time.time()
-    for i in list1:
-        for j in list2:
-            if i == j:
-                count += 1
-    time.sleep(1)
-    finish = time.time()
-
-    print('original: ', finish - start)
-    return count
-
-
-def perfect_counter2(list1: list, list2: list) -> int:
-    count, start, finish = 0, 0, 0
-
-    start = time.time()
-    list1 = set(list1)
-    list2 = set(list2)
-    count = len(list1.intersection(list2))
-    time.sleep(1)
-    finish = time.time()
-
-    print('my variant: ', finish - start)
-    return count
-
-
 def count_connections(list1, list2):
-    count, start, finish = 0, 0, 0
-
+    count = 0
     start = datetime.datetime.now()
     for i in list1:
         for j in list2:
@@ -153,10 +123,7 @@ def count_connections(list1, list2):
     print('original: ', delta.microseconds)
     return count
 
-
 def perfect_counter(list1, list2):
-    count, start, finish = 0, 0, 0
-
     start = datetime.datetime.now()
     list1 = set(list1)
     list2 = set(list2)
@@ -168,11 +135,9 @@ def perfect_counter(list1, list2):
     return count
 
 def sort(array):
-
     less = []
     equal = []
     greater = []
-
     if len(array) > 1:
         pivot = array[0]
         for x in array:
@@ -185,7 +150,6 @@ def sort(array):
         return sort(less)+equal+sort(greater)
     else:
         return array
-
 
 def binarySearch(arr, l, r, x):
     if r >= l:
@@ -200,16 +164,15 @@ def binarySearch(arr, l, r, x):
         return 0
 
 def my2(list1, list2):
+    start = datetime.datetime.now()
     list2 = sort(list2)
     count, r = 0, len(list2)-1
-    start = datetime.datetime.now()
     for i in list1:
-        count += binarySearch(list2,0, r, i)
+        count += binarySearch(list2, 0, r, i)
     time.sleep(1)
     finish = datetime.datetime.now()
     print('my_new: ', (finish-start).microseconds)
     return count
-
 
 
 if __name__ == '__main__':
@@ -217,10 +180,19 @@ if __name__ == '__main__':
              51243234, 5124312, 521434, 154233254623, 3246356345]
     list2 = [10, 3, 7, 8, 0, 5, 1254326, 4563476, 7684586, 3254452, 1525422431, 32454236, 546437, 265342, 51435151,
              6315, 2456223, 2412425, 3425, 1243, 353526]
-    count_connections(list1, list2)
-    perfect_counter(list1, list2)
-    my2(list1, list2)   
+    print(count_connections(list1, list2))
+    time.sleep(2)
+    print(perfect_counter(list1, list2))
+    time.sleep(2)
+    print(my2(list1, list2))
 ```
+I obtained such results:
+```
+original:  10989
+my variant:  3367
+my_new:  15101
+```
+looks like variant with set intersections works fine, but I didn't use big list. I think for big lists variant with binary search will show better results. Shortly, how `my2` function works, it sorts one list with quicksort and then applies binary search for each value in unsorted list.
 
 It is good for small lists
 
