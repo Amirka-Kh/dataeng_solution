@@ -196,13 +196,27 @@ for i in string:
             temp_string.append(i)
         else:
             temp_string = []
+	    temp_string.append(i)
     else:
         temp_string.append(i)
 
 print(len(sub_string))
 ```
+This solution takes O(n) because converting input string to list of characters take max O(n), then we have a loop with 2 conditions. Taking to consideration 'aaaaa' and 'abdegsq' cases, we can find what they take same time. So, therefore this solution takes O(n).
+
 3. Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+Solution: (input should be provided in form: nums = [1,3,5,6], target = 5)
 ```
-print('hello')
+list = input().split(' ')
+array = [int(i) for i in list[2][1:-2].split(',')]
+target = int(list[5])
+
+for i in range(len(array)):
+    if target == array[i]:
+        print(i)
+        break
+    elif target < array[i]:
+        print(i)
+        break
 ```
 ## Linux Shell
