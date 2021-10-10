@@ -21,14 +21,15 @@ WHERE id NOT IN (
 ```
 My solution:
 ```
-SELECT id 
-FROM users
-
+CREATE TABLE tbl AS
 SELECT user_id
 FROM departments
 WHERE department_id = 1
 
-INNER JOIN id AND user_id
+
+SELECT id 
+FROM users, tbl
+where id = tbl.user_id
 ```
 2. Write a SQL query to find all duplicate lastnames in a table named user
 ```sql
@@ -70,26 +71,13 @@ HAVING COUNT(lastname) > 1
 ```
 My solution:
 ```sql
-select * from salary
-group by salary
-order by salary desc limit 1,1;
-
-select id, MAX(salary) as salary
-from salary
-where salary in 
-(select salary from salary MINUS select MAX(salary)
- from salary);
- 
- select id, max(salary)as salary
- from salary
- where salary <> (select max(salary)
- from salary);
- 
-SELECT id, salary
-FROM salary A
-WHERE 2 = (SELECT count(n-2) 
-             FROM salary B 
-             WHERE B.salary>A.salary)
+select first_name, salary
+from users, salaries
+where users.id = salaries.id
+group by users.id, salary
+order by salary desc
+limit 1
+offset 1;
 ```
 
 ## Algorithms and Data Structures
