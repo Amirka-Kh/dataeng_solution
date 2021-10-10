@@ -13,7 +13,7 @@ import pathlib
 '''--------query select function--------'''
 def query_select(img_status, min_age, max_age):
     min_age *= 365 * 24 * 3600 * 1000
-    max_age += 365 * 24 * 3600 * 1000
+    max_age *= 365 * 24 * 3600 * 1000
     conn = None
     data = None
 
