@@ -182,7 +182,27 @@ my_new:  15101
 ```
 looks like variant with set intersections works fine, but I didn't use big list. I think for big lists variant with binary search will show better results. Shortly, how `my2` function works, it sorts one list with quicksort and then applies binary search for each value in unsorted list.
 
-It is good for small lists
-
 2. Given a string `s`, find the length of the longest substring without repeating characters. Analyze your solution and please provide Space and Time complexities.
+```
+string = list(input())
+temp_string = []
+sub_string = []
+
+for i in string:
+    if i in temp_string:
+        if len(temp_string)>len(sub_string):
+            sub_string = temp_string
+            temp_string = []
+            temp_string.append(i)
+        else:
+            temp_string = []
+    else:
+        temp_string.append(i)
+
+print(len(sub_string))
+```
+3. Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+```
+print('hello')
+```
 ## Linux Shell
