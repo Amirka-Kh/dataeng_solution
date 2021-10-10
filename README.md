@@ -107,38 +107,121 @@ def count_connections(list1: list, list2: list) -> int:
 ```
 My solution:
 ```
-import time
+import datetime, time
 
-def count_connections(list1: list, list2: list) -> int:
-  count, start, finish = 0, 0, 0
-    
-  start = time.time()
-  for i in list1:
-    for j in list2:
-      if i == j:
-        count += 1
-  finish = time.time()
-  
-  print('original: ', finish-start) 
-  return count
-
-def perfect_counter(list1: list, list2: list) -> int:
+def count_connections2(list1, list2) -> int:
     count, start, finish = 0, 0, 0
-    
+
+    start = time.time()
+    for i in list1:
+        for j in list2:
+            if i == j:
+                count += 1
+    time.sleep(1)
+    finish = time.time()
+
+    print('original: ', finish - start)
+    return count
+
+
+def perfect_counter2(list1: list, list2: list) -> int:
+    count, start, finish = 0, 0, 0
+
     start = time.time()
     list1 = set(list1)
     list2 = set(list2)
     count = len(list1.intersection(list2))
+    time.sleep(1)
     finish = time.time()
-    
-    print('my variant: ', finish-start)
+
+    print('my variant: ', finish - start)
     return count
-    
-list1 = [1, 3, 5, 2, 4, 7]
-list2 = [10, 3, 7, 8, 0, 5]
-count_connections(list1, list2)
-perfect_counter(list1, list2)   
+
+
+def count_connections(list1, list2):
+    count, start, finish = 0, 0, 0
+
+    start = datetime.datetime.now()
+    for i in list1:
+        for j in list2:
+            if i == j:
+                count += 1
+    time.sleep(1)
+    finish = datetime.datetime.now()
+
+    delta = finish - start
+    print('original: ', delta.microseconds)
+    return count
+
+
+def perfect_counter(list1, list2):
+    count, start, finish = 0, 0, 0
+
+    start = datetime.datetime.now()
+    list1 = set(list1)
+    list2 = set(list2)
+    count = len(list1.intersection(list2))
+    time.sleep(1)
+    finish = datetime.datetime.now()
+
+    print('my variant: ', (finish - start).microseconds)
+    return count
+
+def sort(array):
+
+    less = []
+    equal = []
+    greater = []
+
+    if len(array) > 1:
+        pivot = array[0]
+        for x in array:
+            if x < pivot:
+                less.append(x)
+            elif x == pivot:
+                equal.append(x)
+            elif x > pivot:
+                greater.append(x)
+        return sort(less)+equal+sort(greater)
+    else:
+        return array
+
+
+def binarySearch(arr, l, r, x):
+    if r >= l:
+        mid = l + (r - l) // 2
+        if arr[mid] == x:
+            return 1
+        elif arr[mid] > x:
+            return binarySearch(arr, l, mid - 1, x)
+        else:
+            return binarySearch(arr, mid + 1, r, x)
+    else:
+        return 0
+
+def my2(list1, list2):
+    list2 = sort(list2)
+    count, r = 0, len(list2)-1
+    start = datetime.datetime.now()
+    for i in list1:
+        count += binarySearch(list2,0, r, i)
+    time.sleep(1)
+    finish = datetime.datetime.now()
+    print('my_new: ', (finish-start).microseconds)
+    return count
+
+
+
+if __name__ == '__main__':
+    list1 = [1, 3, 5, 2, 4, 7, 11000, 1242143, 214124, 1241, 214214, 125354, 15234, 15243, 125434154, 15423, 5123,
+             51243234, 5124312, 521434, 154233254623, 3246356345]
+    list2 = [10, 3, 7, 8, 0, 5, 1254326, 4563476, 7684586, 3254452, 1525422431, 32454236, 546437, 265342, 51435151,
+             6315, 2456223, 2412425, 3425, 1243, 353526]
+    count_connections(list1, list2)
+    perfect_counter(list1, list2)
+    my2(list1, list2)   
 ```
+
 It is good for small lists
 
 2. Given a string `s`, find the length of the longest substring without repeating characters. Analyze your solution and please provide Space and Time complexities.
