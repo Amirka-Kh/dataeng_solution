@@ -220,3 +220,29 @@ for i in range(len(array)):
         break
 ```
 ## Linux Shell
+1. `netstat -aon | find ":443"`
+then `netstat -aon | find ":80"`
+2. create `pidp.sh` script (by cat for example:
+```sh
+#!/bin/bash
+
+# reads the user input
+
+echo "Enter the process PID: "
+read pid
+echo "here is the result: "
+cat /proc/$pid/environ | tr '\0' '\n'
+```
+then run it:
+`sh ./pidp.sh`
+
+Another variant:
+```
+read -p "PID:" pid_val
+cat /proc/$pid_val/environ
+```
+3. Solution:
+`python3 my_program.py &`
+then look to backround processes:
+`jobs`
+and choose\kill needed one by `kill %(interested_process)`
