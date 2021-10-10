@@ -2,7 +2,6 @@
 ## Content
 1.[Task description](#task-description)
 2.[Solution](#solution)
-3.[Faced problems](#faced-problems)
 
 ## Task description
 ### Data processing description
@@ -44,7 +43,4 @@ if str(index) in hash_id.keys():
 ```
 Then I save changes.
 
-DB cho tam? do pishi
-
-## Faced problems
-hash id, request, path, db(vashe ujaas)
+After I connect to database trought psycolg2 library. Create table if not exist and submit values.
